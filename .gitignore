@@ -1,0 +1,27 @@
+# Logs
+logs/
+*.log
+
+# Dependency directories
+node_modules/
+
+# Environment variables
+.env
+
+# Test reports and artifacts
+reports/
+allure-report/
+screenshots/
+
+# IDE-specific files
+.vscode/
+.idea/
+*.iml
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Git-specific files
+*.swp
+*.swo

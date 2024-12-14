@@ -1,0 +1,34 @@
+{
+  "name": "final",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "wdio": "wdio run ./wdio.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarianaZozulia/final.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarianaZozulia/final/issues"
+  },
+  "homepage": "https://github.com/MarianaZozulia/final#readme",
+  "dependencies": {
+    "@wdio/cli": "^9.4.1",
+    "@wdio/spec-reporter": "^9.2.14",
+    "@wdio/sync": "^7.27.0",
+    "chai": "^5.1.2",
+    "chai-webdriverio": "^1.0.0",
+    "moment": "^2.30.1",
+    "webdriverio": "^9.4.1"
+  },
+  "devDependencies": {
+    "@wdio/local-runner": "^9.4.1",
+    "@wdio/mocha-framework": "^9.2.8"
+  }
+}
