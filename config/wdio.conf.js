@@ -7,10 +7,13 @@ exports.config = {
     exclude: [],
     maxInstances: 5,
     capabilities: [{
-        maxInstances: 1,
-        browserName: process.env.BROWSER || 'chrome',
-        acceptInsecureCerts: true,
+        browserName: process.env.BROWSER || 'chrome', 
+        'goog:chromeOptions': { args: ['--headless', '--disable-gpu'] },
     }],
+    suites: {
+        smoke: ['./tests/smoke/*.spec.js'],
+        other: ['./tests/other/*.spec.js'], 
+    },
     logLevel: 'info',
     bail: 0,
     baseUrl: 'https://cloud.google.com',
@@ -19,11 +22,27 @@ exports.config = {
     connectionRetryCount: 3,
     services: ['chromedriver'],
     framework: 'mocha',
-    reporters: ['spec'],
+    reporters: [
+        ['spec', { symbols: { passed: '[PASS]', failed: '[FAIL]' } }],
+      ],
     mochaOpts: {
         ui: 'bdd',
         timeout: 60000
     },
+    beforeSession: function (config, capabilities, specs) {
+        const suite = process.env.SUITE; // Параметр SUITE
+        if (suite && config.suites[suite]) {
+          config.specs = config.suites[suite];
+        }
+      },
+      afterTest: async function (test, context, { error }) {
+        if (error) {
+          const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+          const screenshotPath = `./reports/screenshots/${test.title}-${timestamp}.png`;
+          await browser.saveScreenshot(screenshotPath);
+        }
+      },
+    
     onComplete: function () {
         console.log('Test execution completed.');
     }
